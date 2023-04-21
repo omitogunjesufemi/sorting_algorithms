@@ -1,5 +1,10 @@
 #include "sort.h"
-
+/**
+ * swap - swap values of two integer variables
+ * @x: pointer to first variable
+ * @y: pointer to second variable
+ * Return: nothing
+*/
 void swap(int *x, int *y)
 {
 	int tmp;
@@ -8,7 +13,13 @@ void swap(int *x, int *y)
 	*x = *y;
 	*y = tmp;
 }
-
+/**
+ * bubble_sort - an implementation of the bubble
+ * sort algorithm
+ * @array: array to sort
+ * @size: size of the array
+ * Return: nothing
+*/
 void bubble_sort(int *array, size_t size)
 {
 	size_t i, j, swapped;
