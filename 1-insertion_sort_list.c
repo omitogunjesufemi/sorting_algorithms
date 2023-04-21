@@ -21,8 +21,8 @@ void insertion_sort_list(listint_t **list)
 	current = (*list)->next;
 	while (current != NULL)
 	{
-		position = find_position(*list, current);
-		if (position != current)
+		position = current->prev;
+		if (position->n > current->n)
 		{
 			current->prev->next = current->next;
 
@@ -39,32 +39,14 @@ void insertion_sort_list(listint_t **list)
 
 			position->prev = current;
 			print_list(*list);
+
+			if (current->prev == NULL)
+				current = (*list)->next;
 		}
 		else
 		{
-			print_list(*list);
 			current = current->next;
 		}
 
 	}
-}
-
-/**
- * find_postion - Returns a pointer to a node for comparison with
- * current node to determine whether they would be swapped
- * @head: Head pointer to the list
- * @curr: Current pointer
- * Return: Pointer to a node for comparison
- */
-listint_t *find_position(listint_t *head, listint_t *curr)
-{
-	listint_t *position;
-
-	position = head;
-	while (position != curr && position->n <= curr->n)
-	{
-		position = position->next;
-	}
-
-	return (position);
 }
