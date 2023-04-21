@@ -50,8 +50,13 @@ This project was done by two students, which has help understand:
 &emsp;File(s):  
 - &emsp;&emsp;&emsp;[file]() - file description
 
-## Author
+## Authors
 ### Jesufemi Omitogun
 - Github - [omitogunjesufemi](https://github.com/omitogunjesufemi)
 - Twitter - [@Username](https://twitter.com/omixcreative)
 - Linkedin - [@Username](https://www.linkedin.com/in/omitogunjesufemi)
+
+### Nwafor Emmanuel
+- Github - [Emmo00](https://github.com/Emmo00)
+- Twitter - [@emma_nwafor1](https://twitter.com/emma_nwafor1)
+- Linkedin - [Emmanuel Nwafor](https://www.linkedin.com/in/emmanuel-nwafor-53735a270)
