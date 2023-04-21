@@ -21,4 +21,27 @@ void print_array(const int *array, size_t size);
 void print_list(const listint_t *list);
 void bubble_sort(int *array, size_t size);
 
+/**
+ * insertion_sort_list - Sorts a doubly linked list of integers in
+ * ascending order using the insertion sort algorithm
+ *
+ * @list: Address to the head of the head of the doubly linked list
+ *
+ * The integer n of the node are not to be modififed, but the nodes
+ * themselves to be swapped
+ *
+ * It prints the list after each time two elements are swapped
+ */
+void insertion_sort_list(listint_t **list);
+
+/**
+ * find_postion - Returns a pointer to a node for comparison with
+ * current node to determine whether they would be swapped
+ * @head: Head pointer to the list
+ * @curr: Current pointer
+ * Return: Pointer to a node for comparison
+ */
+listint_t *find_position(listint_t *head, listint_t *curr);
+
+
 #endif /* SORT_H */
