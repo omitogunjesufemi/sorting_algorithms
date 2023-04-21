@@ -51,6 +51,7 @@ This project was done by two students, which has help understand:
 - &emsp;&emsp;&emsp;[file]() - file description
 
 ## Author
+### Jesufemi Omitogun
 - Github - [omitogunjesufemi](https://github.com/omitogunjesufemi)
 - Twitter - [@Username](https://twitter.com/omixcreative)
 - Linkedin - [@Username](https://www.linkedin.com/in/omitogunjesufemi)
