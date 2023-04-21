@@ -35,14 +35,4 @@ void selection_sort(int *array, size_t size);
  */
 void insertion_sort_list(listint_t **list);
 
-/**
- * find_postion - Returns a pointer to a node for comparison with
- * current node to determine whether they would be swapped
- * @head: Head pointer to the list
- * @curr: Current pointer
- * Return: Pointer to a node for comparison
- */
-listint_t *find_position(listint_t *head, listint_t *curr);
-
-
 #endif /* SORT_H */
