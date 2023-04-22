@@ -28,6 +28,7 @@ void swap(listint_t *x, listint_t *y, listint_t **head)
 void insertion_sort_list(listint_t **head)
 {
 	listint_t *node, *tmp;
+
 	node = (*head)->next;
 	while (node != NULL)
 	{
