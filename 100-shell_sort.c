@@ -9,7 +9,7 @@ size_t knuth(size_t size)
 	size_t h;
 
 	if (size <= 0)
-		return 1;
+		return (1);
 	for (h = 0; h < size; h = h * 3 + 1)
 		;
 	return ((h - 1) / 3);
@@ -37,11 +37,11 @@ void swap(int *x, int *y)
  */
 void shell_sort(int *array, size_t size)
 {
-	size_t gap, i, j;
+	int gap, i, j;
 
 	for (gap = knuth(size); gap > 0; gap = (gap - 1) / 3)
 	{
-		for (i = 0; i + gap < size; i++)
+		for (i = 0; i + gap < (int)size; i++)
 		{
 			j = i;
 			while (j >= 0 && array[j] > array[j + gap])
