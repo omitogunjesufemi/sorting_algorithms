@@ -39,6 +39,8 @@ void shell_sort(int *array, size_t size)
 {
 	int gap, i, j;
 
+	if (!array || size == 0)
+		return;
 	for (gap = knuth(size); gap > 0; gap = (gap - 1) / 3)
 	{
 		for (i = 0; i + gap < (int)size; i++)
