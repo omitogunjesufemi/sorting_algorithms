@@ -29,6 +29,8 @@ void insertion_sort_list(listint_t **head)
 {
 	listint_t *node, *tmp;
 
+	if (*head == NULL)
+		return;
 	node = (*head)->next;
 	while (node != NULL)
 	{
