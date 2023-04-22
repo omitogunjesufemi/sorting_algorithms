@@ -1,52 +1,42 @@
 #include "sort.h"
-
 /**
- * insertion_sort_list - Sorts a doubly linked list of integers in
- * ascending order using the insertion sort algorithm
- *
- * @list: Address to the head of the head of the doubly linked list
- *
- * The integer n of the node are not to be modififed, but the nodes
- * themselves to be swapped
- *
- * It prints the list after each time two elements are swapped
- */
-void insertion_sort_list(listint_t **list)
+ * swap - swap nodes of a doubly linked list
+ * @x: first node
+ * @y: second node
+ * @head: double pointer to head of doubly linked list
+ * Return: nothing
+*/
+void swap(listint_t *x, listint_t *y, listint_t **head)
 {
-	listint_t *current, *position;
-
-	if (list == NULL || *list == NULL || (*list)->next == NULL)
-		print_list(*list);
-
-	current = (*list)->next;
-	while (current != NULL)
-	{
-		position = current->prev;
-		if (position->n > current->n)
-		{
-			current->prev->next = current->next;
-
-			if (current->next != NULL)
-				current->next->prev = current->prev;
-
-			current->next = position;
-			current->prev = position->prev;
-
-			if (position->prev != NULL)
-				position->prev->next = current;
-			else
-				*list = current;
-
-			position->prev = current;
-			print_list(*list);
-
-			if (current->prev == NULL)
-				current = (*list)->next;
-		}
-		else
-		{
-			current = current->next;
-		}
-
-	}
+    x->next = y->next;
+    if (y->next != NULL)
+        y->next->prev = x;
+    y->next = x;
+    y->prev = x->prev;
+    if (x->prev != NULL)
+        x->prev->next = y;
+    else
+        *head = y;
+    x->prev = y;
+}
+/**
+ * insertion_sort_list - an implementation of the
+ * insertion sort algorithm on a doubly linked list
+ * @head: double pointer to head of the linked list
+ * Return: nothing
+*/
+void insertion_sort_list(listint_t **head)
+{
+    listint_t *node, *tmp;
+    node = (*head)->next;
+    while (node != NULL)
+    {
+        tmp = node;
+        while (tmp->prev != NULL && tmp->n < tmp->prev->n)
+        {
+            swap(tmp->prev, tmp, head);
+            print_list(*head);
+        }
+        node = node->next;
+    }
 }
