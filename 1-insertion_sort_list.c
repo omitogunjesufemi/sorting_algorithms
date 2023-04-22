@@ -8,16 +8,16 @@
 */
 void swap(listint_t *x, listint_t *y, listint_t **head)
 {
-    x->next = y->next;
-    if (y->next != NULL)
-        y->next->prev = x;
-    y->next = x;
-    y->prev = x->prev;
-    if (x->prev != NULL)
-        x->prev->next = y;
-    else
-        *head = y;
-    x->prev = y;
+	x->next = y->next;
+	if (y->next != NULL)
+		y->next->prev = x;
+	y->next = x;
+	y->prev = x->prev;
+	if (x->prev != NULL)
+		x->prev->next = y;
+	else
+		*head = y;
+	x->prev = y;
 }
 /**
  * insertion_sort_list - an implementation of the
@@ -27,16 +27,16 @@ void swap(listint_t *x, listint_t *y, listint_t **head)
 */
 void insertion_sort_list(listint_t **head)
 {
-    listint_t *node, *tmp;
-    node = (*head)->next;
-    while (node != NULL)
-    {
-        tmp = node;
-        while (tmp->prev != NULL && tmp->n < tmp->prev->n)
-        {
-            swap(tmp->prev, tmp, head);
-            print_list(*head);
-        }
-        node = node->next;
-    }
+	listint_t *node, *tmp;
+	node = (*head)->next;
+	while (node != NULL)
+	{
+		tmp = node;
+		while (tmp->prev != NULL && tmp->n < tmp->prev->n)
+		{
+			swap(tmp->prev, tmp, head);
+			print_list(*head);
+		}
+		node = node->next;
+	}
 }
