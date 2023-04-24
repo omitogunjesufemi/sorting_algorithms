@@ -67,7 +67,7 @@ void helper_function(int *array, int start_point, int end_point, int n);
  * @n: This is the total size of the array, to be used for printing the arrays
  * Return: partition position
  */
-int lomuto_partition_scheme(int *array, int start_point, int end_point, int n);
+int lomuto_partition_scheme(int *array, int start_point, int end_point);
 
 /**
  * swap_elements - Swap the two elements from their position

@@ -33,7 +33,8 @@ void helper_function(int *array, int start_point, int end_point, int n)
 
 	if (start_point > end_point)
 		return;
-	partition = lomuto_partition_scheme(array, start_point, end_point, n);
+	partition = lomuto_partition_scheme(array, start_point, end_point);
+	print_array(array, n);
 	/*Left Partition*/
 	helper_function(array, start_point, partition - 1, n);
 	/*Right Partition*/
@@ -48,7 +49,7 @@ void helper_function(int *array, int start_point, int end_point, int n)
  * @n: This is the total size of the array, to be used for printing the arrays
 * Return: partition position
  */
-int lomuto_partition_scheme(int *array, int start_point, int end_point, int n)
+int lomuto_partition_scheme(int *array, int start_point, int end_point)
 {
 	int i, j, pivot;
 
@@ -60,7 +61,6 @@ int lomuto_partition_scheme(int *array, int start_point, int end_point, int n)
 		if (array[i] <= pivot)
 		{
 			swap_elements(&(array[i]), &(array[j]));
-			print_array(array, n);
 			j++;
 		}
 	}
