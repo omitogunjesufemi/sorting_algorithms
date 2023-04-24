@@ -76,5 +76,21 @@ int lomuto_partition_scheme(int *array, int start_point, int end_point);
  */
 void swap_elements(int *element_1, int *element_2);
 
+/**
+ * cocktail_sort_list - Sorts a doubly linked list of integers in bidirectional
+ * movement
+ * @list: The list to be sorted
+ */
+void cocktail_sort_list(listint_t **list);
+
+/**
+ * swap - swap nodes of a doubly linked list
+ * @x: first node
+ * @y: second node
+ * @head: double pointer to head of doubly linked list
+ * Return: nothing
+*/
+void swap(listint_t *x, listint_t *y, listint_t **head);
+
 
 #endif /* SORT_H */
