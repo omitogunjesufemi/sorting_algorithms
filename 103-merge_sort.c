@@ -1,5 +1,4 @@
 #include "sort.h"
-
 /**
  * merge_sort - Sorts an array of integers in ascending order by splitting
  * arrays into sub arrays, till it is a sub-array of length 1, then merge
@@ -11,7 +10,27 @@
  */
 void merge_sort(int *array, size_t size)
 {
-	recursive_array_division(array, size);
+	size_t division_point;
+	int left_array[10000];
+	int right_array[10000];
+	size_t left_len, right_len;
+
+	if (size < 2)
+		return;
+
+	division_point = size / 2;
+	left_len = division_point;
+	right_len = size - division_point;
+	create_subarrays(array, 0, division_point, left_array);
+	create_subarrays(array, division_point, size, right_array);
+
+	merge_sort(left_array, left_len);
+	merge_sort(right_array, right_len);
+
+	printf("Merging...\n");
+	sort_array(array, left_array, right_array,
+		   left_len, right_len);
+
 }
 
 /**
@@ -19,50 +38,50 @@ void merge_sort(int *array, size_t size)
  * @array: The main array
  * @left_array: The left array
  * @right_array: The right array
+ * @left_len: Size of left array
+ * @right_len: Size of right array
  */
-void sort_array(int *array, int *left_array, int *right_array)
+void sort_array(int *array, int *left_array, int *right_array,
+		size_t left_len, size_t right_len)
 {
-	int left_len, int right_len;
+	size_t left_idx, right_idx, sub_idx;
 
-	left_len = array_len(left_array);
-	right_len = array_len(right_array);
-}
+	right_idx = 0, left_idx = 0, sub_idx = 0;
+	while (left_idx < left_len && right_idx < right_len)
+	{
+		if (left_array[left_idx] < right_array[right_idx])
+		{
+			array[sub_idx] = left_array[left_idx];
+			left_idx++;
+		}
+		else
+		{
+			array[sub_idx] = right_array[right_idx];
+			right_idx++;
+		}
+		sub_idx++;
+	}
 
-/**
- * array_len - Returns the length of an array
- * @array: Array, whose length is to be returned
- * Return: integer
- */
-size_t array_len(int *array)
-{
-	size_t i;
+	while (left_idx < left_len)
+	{
+		array[sub_idx] = left_array[left_idx];
+		left_idx++;
+		sub_idx++;
+	}
 
-	while (array[i] != NULL)
-		i++;
-	return (i);
-}
+	while (right_idx < right_len)
+	{
+		array[sub_idx] = right_array[right_idx];
+		right_idx++;
+		sub_idx++;
+	}
 
-/**
- * recursive_array_division - Divides the array recursively
- * @array - Array to be divided
- * @size - Size of the array
- */
-void recursive_array_division(int *array, size_t size)
-{
-	if (size < 2)
-		return;
-
-	size_t division_point;
-	int left_array[100];
-	int right_array[100];
-
-	division_point = size / 2;
-	create_subarrays(array, 0, division_point, left_array);
-	create_subarrays(array, division_point, size, right_array);
-	print_array(left_array, division_point);
-	print_array(right_array, size - division_point);
-	recursive_array_division(left_array, division_point);
-	recursive_array_division(right_array, size - division_point);
+	printf("[left]:");
+	print_array(left_array, left_len);
+	printf("[right]:");
+	print_array(right_array, right_len);
+	printf("[Done]:");
+	print_array(array, right_len + left_len);
 }
 
 /**

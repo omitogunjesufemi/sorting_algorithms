@@ -114,25 +114,13 @@ void merge_sort(int *array, size_t size);
 void create_subarrays(int *array, int start, int end, int *sub_array);
 
 /**
- * recursive_array_division - Divides the array recursively
- * @array - Array to be divided
- * @size - Size of the array
- */
-void recursive_array_division(int *array, size_t size);
-
-/**
  * sort_array - This sorts the left and right arrays in ascending order
  * @array: The main array
  * @left_array: The left array
  * @right_array: The right array
+ * @left_len: Size of left array
+ * @right_len: Size of right array
  */
-void sort_array(int *array, int *left_array, int *right_array);
-
-/**
- * array_len - Returns the length of an array
- * @array: Array, whose length is to be returned
- * Return: integer
- */
-size_t array_len(int *array);
-
+void sort_array(int *array, int *left_array, int *right_array,
+		size_t left_len, size_t right_len);
 #endif /* SORT_H */
