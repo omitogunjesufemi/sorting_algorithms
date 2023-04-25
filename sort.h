@@ -92,5 +92,35 @@ void cocktail_sort_list(listint_t **list);
 */
 void swap(listint_t *x, listint_t *y, listint_t **head);
 
+/**
+ * merge_sort - Sorts an array of integers in ascending order by splitting
+ * arrays into sub arrays, till it is a sub-array of length 1, then merge
+ *
+ * @array: Array to be sorted
+ * @size: Array size
+ *
+ * It is implemented using the top-down merge sort algorithm
+ */
+void merge_sort(int *array, size_t size);
 
+/**
+ * create_subarrays - Creates a division of the arrays recursively
+ * @array: Array to be divided
+ * @start: Index to the first element of the sub-array
+ * @end: Index to the last element of the sub-array
+ * @sub_array: Pointer to the sub_array
+ * Return: Sub-array with range of start to end
+ */
+void create_subarrays(int *array, int start, int end, int *sub_array);
+
+/**
+ * sort_array - This sorts the left and right arrays in ascending order
+ * @array: The main array
+ * @left_array: The left array
+ * @right_array: The right array
+ * @left_len: Size of left array
+ * @right_len: Size of right array
+ */
+void sort_array(int *array, int *left_array, int *right_array,
+		size_t left_len, size_t right_len);
 #endif /* SORT_H */
