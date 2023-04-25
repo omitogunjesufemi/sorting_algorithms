@@ -34,6 +34,7 @@ void helper_function(int *array, int start_point, int end_point, int n)
 	if (start_point > end_point)
 		return;
 	partition = lomuto_partition_scheme(array, start_point, end_point);
+	printf("Pivot: %d\n", partition);
 	print_array(array, n);
 	/*Left Partition*/
 	helper_function(array, start_point, partition - 1, n);
@@ -62,6 +63,7 @@ int lomuto_partition_scheme(int *array, int start_point, int end_point)
 		{
 			swap_elements(&(array[i]), &(array[j]));
 			j++;
+
 		}
 	}
 	swap_elements(&(array[end_point]), &(array[j]));
