@@ -84,13 +84,13 @@ void swap_elements(int *element_1, int *element_2);
 void cocktail_sort_list(listint_t **list);
 
 /**
- * swap - swap nodes of a doubly linked list
+ * swap_list_nodes - swap nodes of a doubly linked list
  * @x: first node
  * @y: second node
  * @head: double pointer to head of doubly linked list
  * Return: nothing
 */
-void swap(listint_t *x, listint_t *y, listint_t **head);
+void swap_list_nodes(listint_t *x, listint_t *y, listint_t **head);
 
 /**
  * merge_sort - Sorts an array of integers in ascending order by splitting
