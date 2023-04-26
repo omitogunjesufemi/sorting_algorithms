@@ -122,4 +122,6 @@ void create_subarrays(int *array, int start, int end, int *sub_array);
  */
 void sort_array(int *array, int *left_array, int *right_array,
 		size_t left_len, size_t right_len);
+void heap_sort(int *array, size_t size);
+
 #endif /* SORT_H */
