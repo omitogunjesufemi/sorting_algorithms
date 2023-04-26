@@ -23,9 +23,9 @@ void swap(int *x, int *y)
  * a decreasing value will be passed as the size
  * Return: nothing
 */
-void heapify(int *arr, size_t size, int idx, size_t original_size)
+void heapify(int *arr, size_t size, size_t idx, size_t original_size)
 {
-	int left, right, max;
+	size_t left, right, max;
 
 	max = idx;
 	left = 2 * idx + 1;
