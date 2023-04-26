@@ -43,7 +43,7 @@ void heapify(int *arr, size_t size, int idx, size_t original_size)
 }
 /**
  * build_max_heap - build max heap using heapify
- * @array: array of integers
+ * @arr: array of integers
  * @size: size of array to convert
  * Return: nothing
 */
