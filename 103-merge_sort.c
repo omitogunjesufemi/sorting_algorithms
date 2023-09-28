@@ -76,11 +76,11 @@ void sort_array(int *array, int *left_array, int *right_array,
 		sub_idx++;
 	}
 
-	printf("[left]:");
+	printf("[left]: ");
 	print_array(left_array, left_len);
-	printf("[right]:");
+	printf("[right]: ");
 	print_array(right_array, right_len);
-	printf("[Done]:");
+	printf("[Done]: ");
 	print_array(array, right_len + left_len);
 }
 
