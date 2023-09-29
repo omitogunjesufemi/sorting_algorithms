@@ -1,6 +1,5 @@
 #include "sort.h"
 
-hash_node_t *create_node(int key, int value);
 int max_number(int *array, size_t size);
 int no_of_digit(int digit);
 hash_table_t *hash_table_create(unsigned long int size);
@@ -8,7 +7,7 @@ int hash_table_set(hash_table_t *ht, int key, int value);
 int get_the_digit_in_the_place(int no_places, int digit);
 
 /**
- * radix_sort: Sorts an array of integers in ascending order using the
+ * radix_sort - Sorts an array of integers in ascending order using the
  * place values of the integers in the array
  * @array: The array to be sorted, containing numbers >= 0
  * @size: The number of integers in the array
@@ -18,13 +17,13 @@ void radix_sort(int *array, size_t size)
 {
 	int max_no, no_places, count, i, idx;
 	hash_table_t *ht;
-	hash_node_t *node;
+	hash_node_t *node, *temp;
 
 	count = 1;
 	ht = hash_table_create(1024);
 	max_no = max_number(array, size);
 	no_places = no_of_digit(max_no);
-	while(count <= no_places)
+	while (count <= no_places)
 	{
 		for (i = 0; i < (int) size; i++)
 		{
@@ -38,32 +37,46 @@ void radix_sort(int *array, size_t size)
 			{
 				if (node->next == NULL)
 				{
-					array[i] = node->value;
 					printf("%d ", node->value);
+					if (count == no_places)
+						array[i] = node->value;
+					free(node);
 				}
 				else
 				{
 					while (node != NULL)
 					{
-						array[i] = node->value;
+						temp = node;
 						printf("%d ", node->value);
+						if (count == no_places)
+							array[i] = node->value;
 						node = node->next;
+						free(temp);
 					}
 				}
+				ht->array[i] = NULL;
 			}
 		}
 		printf("\n");
 		count++;
 	}
+	free(ht->array);
+	free(ht);
 }
 
+/**
+ * get_the_digit_in_the_place - Get the place in the digit
+ * @no_places: The particular place to get the digit
+ * @digit: The digit to get a particular digit from
+ * Return: The digit at the particular place
+ */
 int get_the_digit_in_the_place(int no_places, int digit)
 {
 	int count, remainder;
 
 	count = 0;
 	remainder = 0;
-	while(count < no_places)
+	while (count < no_places)
 	{
 		remainder = digit % 10;
 		digit = (digit - remainder) / 10;
@@ -72,6 +85,12 @@ int get_the_digit_in_the_place(int no_places, int digit)
 	return (remainder);
 }
 
+/**
+ * max_number - Get the maximum number in an array of integers
+ * @array: The array of integers
+ * @size: The size of the array of integers
+ * Return: The largest number in the array
+ */
 int max_number(int *array, size_t size)
 {
 	int max, i;
@@ -85,12 +104,17 @@ int max_number(int *array, size_t size)
 	return (max);
 }
 
+/**
+ * no_of_digit - To get the number of digits present in an integer
+ * @digit: The integer to get the number of digits from
+ * Return: Number of integers
+ */
 int no_of_digit(int digit)
 {
 	int remainder, count;
 
 	count = 0;
-	while(digit)
+	while (digit)
 	{
 		remainder = digit % 10;
 		digit = (digit - remainder) / 10;
@@ -98,7 +122,6 @@ int no_of_digit(int digit)
 	}
 	return (count);
 }
-
 
 /**
  * hash_table_create - Creates a Hash Table
@@ -134,36 +157,38 @@ hash_table_t *hash_table_create(unsigned long int size)
 /**
  * hash_table_set - Adds an element to the hash table
  * @ht: Hash table to add or update key/value to
- * @key: The Key, which cannot not be an empty string
- * @value: The value associated with the key, which must be duplicated.
- * Value can be an empty string
- *
+ * @key: The position of the digit
+ * @value: Integer from the array
  * Return: 1 if it succeeded, 0 otherwise
- *
- * Incase of collision, add the new node at the beginning of the list
  */
 int hash_table_set(hash_table_t *ht, int key, int value)
 {
 	hash_node_t *dict, *new_node;
 	int index;
 
-	if (ht == NULL)
-		return (0);
-
 	index = key;
 	dict = ht->array[index];
 	if (dict == NULL)     /*If no node is in the position*/
 	{
-		new_node = create_node(key, value);
+		new_node = malloc(sizeof(hash_node_t));
 		if (new_node == NULL)
 			return (0);
-
+		new_node->key = key;
+		new_node->value = value;
+		new_node->next = NULL;
+		if (new_node == NULL)
+			return (0);
 		ht->array[index] = new_node;
 		return (1);
 	}
 	else /*There is a node in the position*/
 	{
-		new_node = create_node(key, value);
+		new_node = malloc(sizeof(hash_node_t));
+		if (new_node == NULL)
+			return (0);
+		new_node->key = key;
+		new_node->value = value;
+		new_node->next = NULL;
 		if (new_node == NULL)
 			return (0);
 		new_node->next = dict;
@@ -172,25 +197,4 @@ int hash_table_set(hash_table_t *ht, int key, int value)
 		return (1);
 	}
 	return (0);
-}
-
-/**
- * create_node - Initialises a new node with it key/value pair
- * @key: The key
- * @value: Value associated with the key
- * Return: hash_node_t node
- */
-hash_node_t *create_node(int key, int value)
-{
-	hash_node_t *new_node;
-
-	new_node = malloc(sizeof(hash_node_t));
-	if (new_node == NULL)
-		return (NULL);
-
-	new_node->key = key;
-        new_node->value = value;
-	new_node->next = NULL;
-
-	return (new_node);
 }
