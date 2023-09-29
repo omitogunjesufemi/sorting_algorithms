@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include<stdlib.h>
+
 /**
  * struct listint_s - Doubly linked list node
  *
@@ -16,6 +17,36 @@ typedef struct listint_s
 	struct listint_s *prev;
 	struct listint_s *next;
 } listint_t;
+
+/**
+ * struct hash_node_s - Node of hash table
+ *
+ * @key: The key, string
+ * The key is unique in the HashTable
+ * @value: The value corresponding to a key
+ * @next: A pointer to the next node of the list
+ */
+typedef struct hash_node_s
+{
+	int key;
+	int value;
+	struct hash_node_s *next;
+} hash_node_t;
+
+/**
+ * struct hash_table_s - Hash table data structure
+ *
+ * @size: The size of the array
+ * @array: An array of size @size
+ * Each cell of this array is a pointer to the first node of a linked list,
+ * because we want our HashTable to use a Chaining collision handling
+ */
+typedef struct hash_table_s
+{
+	unsigned long int size;
+	hash_node_t **array;
+} hash_table_t;
+
 
 void print_array(const int *array, size_t size);
 void print_list(const listint_t *list);
@@ -123,5 +154,15 @@ void create_subarrays(int *array, int start, int end, int *sub_array);
 void sort_array(int *array, int *left_array, int *right_array,
 		size_t left_len, size_t right_len);
 void heap_sort(int *array, size_t size);
+
+/**
+ * radix_sort: Sorts an array of integers in ascending order using the
+ * place values of the integers in the array
+ *
+ * @array: The array to be sorted, containing numbers >= 0
+ * @size: The number of integers in the array
+ * It implements the LSD Radix sort algorithm
+ */
+void radix_sort(int *array, size_t size);
 
 #endif /* SORT_H */
