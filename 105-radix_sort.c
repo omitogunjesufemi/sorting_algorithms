@@ -3,7 +3,8 @@
 int max_number(int *array, size_t size);
 int no_of_digit(int digit);
 hash_table_t *hash_table_create(unsigned long int size);
-int hash_table_set(hash_table_t *ht, int key, int value);
+int hash_table_set(hash_table_t *ht, int key, int value, int count,
+		   int no_places);
 int get_the_digit_in_the_place(int no_places, int digit);
 
 /**
@@ -28,7 +29,7 @@ void radix_sort(int *array, size_t size)
 		for (i = 0; i < (int) size; i++)
 		{
 			idx = get_the_digit_in_the_place(count, array[i]);
-			hash_table_set(ht, idx, array[i]);
+			hash_table_set(ht, idx, array[i], count, no_places);
 		}
 		j = 0;
 		for (i = 0; i < (int) ht->size; i++)
@@ -168,7 +169,8 @@ hash_table_t *hash_table_create(unsigned long int size)
  * @value: Integer from the array
  * Return: 1 if it succeeded, 0 otherwise
  */
-int hash_table_set(hash_table_t *ht, int key, int value)
+int hash_table_set(hash_table_t *ht, int key, int value, int count,
+		   int no_places)
 {
 	hash_node_t *dict, *new_node;
 	int index;
@@ -199,7 +201,7 @@ int hash_table_set(hash_table_t *ht, int key, int value)
 		if (new_node == NULL)
 			return (0);
 
-		if (new_node->value < dict->value)
+		if ((count == no_places) && (new_node->value < dict->value))
 		{
 			new_node->next = dict;
 			dict = new_node;
