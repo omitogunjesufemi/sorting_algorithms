@@ -15,12 +15,12 @@ int get_the_digit_in_the_place(int no_places, int digit);
  */
 void radix_sort(int *array, size_t size)
 {
-	int max_no, no_places, count, i, idx;
+	int max_no, no_places, count, i, j, idx;
 	hash_table_t *ht;
 	hash_node_t *node, *temp;
 
 	count = 1;
-	ht = hash_table_create(1024);
+	ht = hash_table_create(size);
 	max_no = max_number(array, size);
 	no_places = no_of_digit(max_no);
 	while (count <= no_places)
@@ -30,6 +30,7 @@ void radix_sort(int *array, size_t size)
 			idx = get_the_digit_in_the_place(count, array[i]);
 			hash_table_set(ht, idx, array[i]);
 		}
+		j = 0;
 		for (i = 0; i < (int) ht->size; i++)
 		{
 			node = ht->array[i];
@@ -37,21 +38,27 @@ void radix_sort(int *array, size_t size)
 			{
 				if (node->next == NULL)
 				{
-					printf("%d ", node->value);
+					printf("%d", node->value);
+					if (j < (int) ht->size - 1)
+						printf(", ");
 					if (count == no_places)
-						array[i] = node->value;
+						array[j] = node->value;
 					free(node);
+					j++;
 				}
 				else
 				{
 					while (node != NULL)
 					{
 						temp = node;
-						printf("%d ", node->value);
+						printf("%d", node->value);
+						if (j < (int) ht->size - 1)
+							printf(", ");
 						if (count == no_places)
-							array[i] = node->value;
+							array[j] = node->value;
 						node = node->next;
 						free(temp);
+						j++;
 					}
 				}
 				ht->array[i] = NULL;
@@ -191,9 +198,18 @@ int hash_table_set(hash_table_t *ht, int key, int value)
 		new_node->next = NULL;
 		if (new_node == NULL)
 			return (0);
-		new_node->next = dict;
-		dict = new_node;
-		ht->array[index] = dict;
+
+		if (new_node->value < dict->value)
+		{
+			new_node->next = dict;
+			dict = new_node;
+			ht->array[index] = dict;
+		}
+		else
+		{
+			dict->next = new_node;
+			ht->array[index] = dict;
+		}
 		return (1);
 	}
 	return (0);
